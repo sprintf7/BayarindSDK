@@ -14,19 +14,41 @@ Add the following dependency to your build.gradle file.
 
 # Simple Usage
 
-1.) Add internet permission to your AndroidManifest.xml file:
+1.) Add Library Repository
+
+On your root **build.gradle** 
+```javascript
+maven {
+    url "https://dl.bintray.com/sprintf7/Bayarind-Payment"
+}
+```
+
+So your build.gradle looks like
+```javascript
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "https://dl.bintray.com/sprintf7/Bayarind-Payment"
+        }
+    }
+}
+```
+
+2.) Add internet permission to your AndroidManifest.xml file:
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-2.) Add camera permission to your AndroidManifest.xml file:
+3.) Add camera permission to your AndroidManifest.xml file:
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-3.) A very basic activity would look like this:
+4.) A very basic activity would look like this:
 
 ```java
 public class BayarindActivity extends AppCompatActivity implements OnBayarindPaymentListener {
@@ -96,27 +118,27 @@ public class BayarindActivity extends AppCompatActivity implements OnBayarindPay
 
     @Override
     public void onSuccess() {
-        sdkCallback("Pembayaran Anda Berhasil");
+        sdkCallback("Payment Success");
     }
 
     @Override
     public void onFailed() {
-        sdkCallback("Pembayaran Anda Gagal");
+        sdkCallback("Payment Failed");
     }
 
     @Override
     public void onCancel() {
-        sdkCallback("Anda membatalkan pembayaran");
+        sdkCallback("Payment Cancelled");
     }
 
     @Override
     public void onPermissionDenied() {
-        sdkCallback("Mohon dikasih izin bro");
+        sdkCallback("Permission denied");
     }
 
     @Override
     public void onError() {
-        sdkCallback("Terjadi error pada SDK");
+        sdkCallback("Opps, something error");
     }
     
 }
