@@ -4,7 +4,7 @@ Library for Bayarind Payment Service
 
 # Intallation
 
-Add the following dependency to your build.gradle file.
+Add the following dependency to your **build.gradle** (Application Level) file.
 
 `implementation 'com.android.support:appcompat-v7:26.1.0'`
 `implementation 'com.android.support:design:26.1.0'`
