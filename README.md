@@ -124,6 +124,34 @@ public class BayarindActivity extends AppCompatActivity implements OnBayarindPay
 
 # Documentation
 
+## Setup
+
+```java
+Transaction transaction = new Transaction();
+transaction.setTransactionNo("TRX1234");
+transaction.setAmount(1000000);
+transaction.setCustomerEmail("customer@email.com");
+transaction.setCustomerName("Customer Name");
+
+BayarindPayment bayarindPayment = new BayarindPayment(YOUR_ACTIVITY.this, transaction);
+bayarindPayment.setOnBayarindPaymentListener(new OnBayarindPaymentListener() {
+    @Override
+    public void onSuccess() {}
+
+    @Override
+    public void onFailed() {}
+
+    @Override
+    public void onError() {}
+
+    @Override
+    public void onCancel() {}
+
+    @Override
+    public void onPermissionDenied() {}
+});
+```
+
 ## `OnBayarindPaymentListener`
 
 This interface will triggered if payment has **Success, Failed, Cancel, Permission Denied, Error**
