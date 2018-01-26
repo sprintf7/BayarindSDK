@@ -106,6 +106,12 @@ public class MainActivity extends AppCompatActivity{
 
 ## Setup
 
+### Main Class 
+    Class BayarindPayment(context, String, String);
+    interface OnBayarindPay();
+
+### Ex
+
 ```java
 String customerId = "CUST001";
 String phone = "0888888888888";
@@ -138,10 +144,14 @@ bayarindPay.setOnBayarindPayListener(new OnBayarindPay() {
 });
 bayarindPay.show();
 ```
+### Note
+    1. Customer id and phone cannot be null
+    2. Customer id must be in alphanumeric and max length 24 char
+    3. Phone must be in numeric and manx length 20 char
 
 ## `OnBayarindPay`
 
-This interface will triggered if payment has **Success, Failed, Cancel, Permission Denied, Error**
+    This interface will triggered if payment has **Success, Failed, Cancel, Permission Denied, Error**
 
 ```java
 @Override
