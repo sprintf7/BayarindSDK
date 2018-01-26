@@ -1,0 +1,6 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="130" android:exitFadeDuration="130">
+    <item android:drawable="@drawable/round_bg_pressed"
+        android:state_pressed="true" />
+    <item android:drawable="@drawable/round_bg" />
+</selector>

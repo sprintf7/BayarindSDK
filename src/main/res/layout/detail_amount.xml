@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@color/colorPrimary">
+
+    <ProgressBar
+        android:elevation="5dp"
+        android:id="@+id/progress"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:id="@+id/detail_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/merchant_block"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginBottom="10sp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="70sp"
+                android:src="@drawable/market_stand"/>
+
+            <TextView
+                android:id="@+id/merchant_name"
+                android:textColor="#FFFF8D"
+                android:text="Merchant Name"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/branch_name"
+                android:textColor="#FBE9E7"
+                android:text="Branch Name"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/cashier_name"
+                android:textColor="#FBE9E7"
+                android:text="Cashier Name"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:alpha=".7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="20sp"
+                android:id="@+id/category_name"
+                android:textColor="#FFFF8D"
+                android:text="Category Name"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:alpha=".9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/amount_field"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="10sp"
+                android:text="Payment Amount"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_below="@id/merchant_block"
+                android:id="@+id/trans_amount"
+                android:paddingTop="7sp"
+                android:paddingBottom="5sp"
+                android:paddingLeft="8sp"
+                android:paddingRight="8sp"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:inputType="number"
+                android:maxLength="9"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="25sp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btn_pay"
+        android:theme="@style/Bayarind.ButtonTeal"
+        android:text="Checkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

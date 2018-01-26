@@ -1,5 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.sprintasia.bayarind" >
+
+    package="net.sprintasia.bayarind">
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <application>
+
+        <activity
+            android:theme="@style/BayarindTheme"
+            android:name="net.sprintasia.bayarind.activity.BayarindPayActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+    </application>
 </manifest>

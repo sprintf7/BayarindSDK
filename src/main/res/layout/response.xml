@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:id="@+id/response_bg"
+    android:layout_height="match_parent" android:background="@color/colorPrimary" android:padding="30sp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/msg_block"
+        android:gravity="center_vertical"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginBottom="50sp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:backgroundTint="@color/colorWhite"
+                android:background="@drawable/ic_check_black_24dp"
+                android:id="@+id/response_logo"
+                android:layout_marginRight="20sp"
+                android:layout_width="80sp"
+                android:layout_height="80sp" />
+
+            <View
+                android:background="@color/colorBlack"
+                android:alpha=".1"
+                android:layout_width="7sp"
+                android:layout_height="match_parent"></View>
+
+            <TextView
+                android:padding="20sp"
+                android:id="@+id/response_message"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp"
+                android:lineSpacingExtra="10dp"
+                android:text="Your Payment has been successfully paid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/block_button"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnMore"
+                android:theme="@style/Bayarind.ButtonTeal"
+                android:text="Lets pay other payment"
+                android:layout_below="@id/msg_block"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:text="or"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnFinish"
+                android:text="Finish"
+                android:theme="@style/Bayarind.ButtonGrey"
+                android:layout_marginTop="10sp"
+                android:layout_below="@id/msg_block"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
