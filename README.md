@@ -5,7 +5,9 @@ Library for Bayarind Payment Service
 # Intallation
 
 Add the following dependency to your **build.gradle** (Application Level) file.
+
 `compile 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.3'`
+
 `compile 'net.sprintasia:bayarind:1.1.20180126'`
 
 # Simple Usage
