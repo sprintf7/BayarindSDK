@@ -6,11 +6,7 @@ Library for Bayarind Payment Service
 
 Add the following dependency to your **build.gradle** (Application Level) file.
 
-`implementation 'com.android.support:appcompat-v7:26.1.0'`
-`implementation 'com.android.support:design:26.1.0'`
-`implementation 'com.android.support:cardview-v7:26.1.+'`
-`implementation 'me.dm7.barcodescanner:zxing:1.9.8'`
-`implementation 'net.sprintasia:bayarind:1.0.0'`
+`compile 'net.sprintasia:bayarind:1.1.20180126'`
 
 # Simple Usage
 
@@ -48,99 +44,61 @@ allprojects {
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-4.) A very basic activity would look like this:
+4.) Add bayarind payment SDK activity to your AndroidManifest.xml
+```xml
+<activity android:name="net.sprintasia.bayarind.activity.BayarindPayActivity" ></activity>
+```
+
+5.) A very basic activity would look like this:
 
 ```java
-public class BayarindActivity extends AppCompatActivity implements OnBayarindPaymentListener {
-    
+public class MainActivity extends AppCompatActivity{
     BayarindPayment bayarindPayment;
     Button btnPay;
-
     @Override
-    public void onCreate(Bundle state) {
-        super.onCreate(state);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnPay = findViewById(R.id.btnPay);
 
+        final EditText custId = findViewById(R.id.customerid);
+        final EditText phone = findViewById(R.id.phone);
+        final TextView reponse = findViewById(R.id.reponse);
+
+        btnPay = findViewById(R.id.btn_pay);
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                payWithBayarind();
+                BayarindPayment bayarindPay = new BayarindPayment(MainActivity.this, custId.getText().toString(), phone.getText().toString());
+                bayarindPay.setOnBayarindPayListener(new OnBayarindPay() {
+                    @Override
+                    public void onCancel() {
+                        reponse.setText("Payment cancelled by user");
+                    }
+
+                    @Override
+                    public void onPermissionDenied() {
+                        reponse.setText("Camera permission is declined by user");
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        reponse.setText("Payment Success");
+                    }
+
+                    @Override
+                    public void onFailed(String message) {
+                        reponse.setText("Payment Failed, message: "+message);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        reponse.setText("Payment Error, message: "+message);
+                    }
+                });
+                bayarindPay.show();
             }
         });
     }
-    
-    private void payWithBayarind(){
-        Transaction transaction = new Transaction();
-        transaction.setTransactionNo(getRandomChar(20));
-        transaction.setAmount(getRandomNumber(1000000));
-        transaction.setCustomerEmail("customer.email@email.com");
-        transaction.setCustomerName("Customer Name");
-
-        bayarindPayment = new BayarindPayment(this, transaction);
-        bayarindPayment.setOnBayarindPaymentListener(this);
-    }
-  
-    private void sdkCallback(String msg){
-
-        AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(this);
-        }
-        builder.setTitle("SDK Callback")
-        .setMessage(msg)
-        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        })
-        .setIcon(android.R.drawable.ic_dialog_alert)
-        .show();
-    }
-
-    private int getRandomNumber(int max){
-        Random rand = new Random();
-        int  n = rand.nextInt(max) + 1000;
-        return n;
-    }
-
-    private String getRandomChar(int length){
-        Random r = new Random();
-        String res = "";
-        String alphabet = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        for (int i = 0; i < length; i++) {
-            res += alphabet.charAt(r.nextInt(alphabet.length()));
-        }
-        return res;
-    }
-
-    @Override
-    public void onSuccess() {
-        sdkCallback("Payment Success");
-    }
-
-    @Override
-    public void onFailed() {
-        sdkCallback("Payment Failed");
-    }
-
-    @Override
-    public void onCancel() {
-        sdkCallback("Payment Cancelled");
-    }
-
-    @Override
-    public void onPermissionDenied() {
-        sdkCallback("Permission denied");
-    }
-
-    @Override
-    public void onError() {
-        sdkCallback("Opps, something error");
-    }
-    
 }
 ```
 
@@ -149,32 +107,39 @@ public class BayarindActivity extends AppCompatActivity implements OnBayarindPay
 ## Setup
 
 ```java
-Transaction transaction = new Transaction();
-transaction.setTransactionNo("TRX1234");
-transaction.setAmount(1000000);
-transaction.setCustomerEmail("customer@email.com");
-transaction.setCustomerName("Customer Name");
-
-BayarindPayment bayarindPayment = new BayarindPayment(YOUR_ACTIVITY.this, transaction);
-bayarindPayment.setOnBayarindPaymentListener(new OnBayarindPaymentListener() {
+String customerId = "CUST001";
+String phone = "0888888888888";
+BayarindPayment bayarindPay = new BayarindPayment(MainActivity.this, customerId, phone);
+bayarindPay.setOnBayarindPayListener(new OnBayarindPay() {
     @Override
-    public void onSuccess() {}
+    public void onCancel() {
+        reponse.setText("Payment cancelled by user");
+    }
 
     @Override
-    public void onFailed() {}
+    public void onPermissionDenied() {
+        reponse.setText("Camera permission is declined by user");
+    }
 
     @Override
-    public void onError() {}
+    public void onSuccess() {
+        reponse.setText("Payment Success");
+    }
 
     @Override
-    public void onCancel() {}
+    public void onFailed(String message) {
+        reponse.setText("Payment Failed, message: "+message);
+    }
 
     @Override
-    public void onPermissionDenied() {}
+    public void onError(String message) {
+        reponse.setText("Payment Error, message: "+message);
+    }
 });
+bayarindPay.show();
 ```
 
-## `OnBayarindPaymentListener`
+## `OnBayarindPay`
 
 This interface will triggered if payment has **Success, Failed, Cancel, Permission Denied, Error**
 
@@ -185,7 +150,7 @@ public void onSuccess() {
 }
 
 @Override
-public void onFailed() {
+public void onFailed(String message) {
     // triggered when payment is failed
 }
 
@@ -200,24 +165,11 @@ public void onPermissionDenied() {
 }
 
 @Override
-public void onError() {
+public void onError(String message) {
     // triggered when something error with SDK
 }
 
 ```
 
 
-## Transaction Model
-
-Transaction model is located in package **net.sprintasia.bayarind.model**
-
-### Attribute
-```java
-String transactionNo;
-int amount;
-String customerEmail;
-String customerName;
-```
-
-All attribute must be filled
 
